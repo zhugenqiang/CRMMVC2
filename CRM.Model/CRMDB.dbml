@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="lf_crm_db2" Class="CRMDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=lf_crm_db2;Persist Security Info=True;User ID=sa" SettingsObjectName="CRM.Model.Properties.Settings" SettingsPropertyName="lf_crm_db2ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.bas_dict" Member="bas_dict">
+    <Type Name="bas_dict">
+      <Column Name="dict_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="dict_type" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="dict_item" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="dict_value" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="dict_is_editable" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sys_user" Member="sys_user">
+    <Type Name="sys_user">
+      <Column Name="usr_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="usr_name" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="usr_pwd" Type="System.String" DbType="VarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="usr_role_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="usr_state" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="sys_role_sys_user" Member="sys_role" ThisKey="usr_role_id" OtherKey="role_id" Type="sys_role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.cst_activity" Member="cst_activity">
+    <Type Name="cst_activity">
+      <Column Name="atv_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="atv_cust_no" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="atv_cust_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="atv_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="atv_place" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="atv_title" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="atv_desc" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="aty_remark" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Association Name="cst_customer_cst_activity" Member="cst_customer" ThisKey="atv_cust_no" OtherKey="cust_no" Type="cst_customer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.cst_customer" Member="cst_customer">
+    <Type Name="cst_customer">
+      <Column Name="cust_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="cust_no" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="cust_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="cust_region" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cust_manager_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cust_manager_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cust_level" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cust_level_label" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cust_satisfy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cust_credit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cust_addr" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="cust_zip" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="cust_tel" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cust_fax" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cust_website" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cust_licence_no" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cust_chieftain" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cust_bankroll" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cust_turnover" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cust_bank" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="cust_bank_account" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cust_local_tax_no" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cust_national_tax_no" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cust_status" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="cst_customer_cst_activity" Member="cst_activity" ThisKey="cust_no" OtherKey="atv_cust_no" Type="cst_activity" />
+      <Association Name="cst_customer_cst_linkman" Member="cst_linkman" ThisKey="cust_no" OtherKey="lkm_cust_no" Type="cst_linkman" />
+      <Association Name="cst_customer_cst_lost" Member="cst_lost" ThisKey="cust_no" OtherKey="lst_cust_no" Type="cst_lost" />
+      <Association Name="cst_customer_cst_service" Member="cst_service" ThisKey="cust_no" OtherKey="svr_cust_no" Type="cst_service" />
+      <Association Name="cst_customer_orders" Member="orders" ThisKey="cust_no" OtherKey="odr_cust_no" Type="orders" />
+    </Type>
+  </Table>
+  <Table Name="dbo.cst_linkman" Member="cst_linkman">
+    <Type Name="cst_linkman">
+      <Column Name="lkm_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="lkm_cust_no" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="lkm_cust_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="lkm_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="lkm_sex" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="lkm_postion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="lkm_tel" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="lkm_mobile" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="lkm_memo" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Association Name="cst_customer_cst_linkman" Member="cst_customer" ThisKey="lkm_cust_no" OtherKey="cust_no" Type="cst_customer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.cst_lost" Member="cst_lost">
+    <Type Name="cst_lost">
+      <Column Name="lst_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="lst_cust_no" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="lst_cust_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="lst_cust_manager_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="lst_cust_manager_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="lst_last_order_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="lst_lost_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="lst_delay" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="lst_reason" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="lst_status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="cst_customer_cst_lost" Member="cst_customer" ThisKey="lst_cust_no" OtherKey="cust_no" Type="cst_customer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.cst_service" Member="cst_service">
+    <Type Name="cst_service">
+      <Column Name="svr_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="svr_type" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="svr_title" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="svr_cust_no" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="svr_cust_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="svr_status" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="svr_request" Type="System.String" DbType="VarChar(3000) NOT NULL" CanBeNull="false" />
+      <Column Name="svr_create_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="svr_create_by" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="svr_create_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="svr_due_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="svr_due_to" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="svr_due_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="svr_deal" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" />
+      <Column Name="svr_deal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="svr_deal_by" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="svr_deal_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="svr_result" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="svr_satisfy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="cst_customer_cst_service" Member="cst_customer" ThisKey="svr_cust_no" OtherKey="cust_no" Type="cst_customer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.orders" Member="orders">
+    <Type Name="orders">
+      <Column Name="odr_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="odr_cust_no" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="odr_cust_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="odr_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="odr_addr" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="odr_status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="orders_orders_line" Member="orders_line" ThisKey="odr_id" OtherKey="odd_order_id" Type="orders_line" />
+      <Association Name="cst_customer_orders" Member="cst_customer" ThisKey="odr_cust_no" OtherKey="cust_no" Type="cst_customer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.orders_line" Member="orders_line">
+    <Type Name="orders_line">
+      <Column Name="odd_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="odd_order_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="odd_prod_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="odd_count" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="odd_unit" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="odd_price" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="orders_orders_line" Member="orders" ThisKey="odd_order_id" OtherKey="odr_id" Type="orders" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="product_orders_line" Member="product" ThisKey="odd_prod_id" OtherKey="prod_id" Type="product" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.product" Member="product">
+    <Type Name="product">
+      <Column Name="prod_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="prod_name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="prod_type" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="prod_batch" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="prod_unit" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="prod_price" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="prod_memo" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Association Name="product_orders_line" Member="orders_line" ThisKey="prod_id" OtherKey="odd_prod_id" Type="orders_line" />
+      <Association Name="product_storage" Member="storage" ThisKey="prod_id" OtherKey="stk_prod_id" Type="storage" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sal_chance" Member="sal_chance">
+    <Type Name="sal_chance">
+      <Column Name="chc_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="chc_source" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="chc_cust_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="chc_title" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="chc_rate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="chc_linkman" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="chc_tel" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="chc_desc" Type="System.String" DbType="VarChar(2000) NOT NULL" CanBeNull="false" />
+      <Column Name="chc_create_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="chc_create_by" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="chc_create_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="chc_due_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="chc_due_to" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="chc_due_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="chc_status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="sal_chance_sal_plan" Member="sal_plan" ThisKey="chc_id" OtherKey="pla_chc_id" Type="sal_plan" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sal_plan" Member="sal_plan">
+    <Type Name="sal_plan">
+      <Column Name="pla_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="pla_chc_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pla_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="pla_todo" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="pla_result" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Association Name="sal_chance_sal_plan" Member="sal_chance" ThisKey="pla_chc_id" OtherKey="chc_id" Type="sal_chance" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.storage" Member="storage">
+    <Type Name="storage">
+      <Column Name="stk_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="stk_prod_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="stk_warehouse" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="stk_ware" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="stk_count" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="stk_memo" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Association Name="product_storage" Member="product" ThisKey="stk_prod_id" OtherKey="prod_id" Type="product" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sys_right" Member="sys_right">
+    <Type Name="sys_right">
+      <Column Name="right_code" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="right_parent_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="right_type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="right_text" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="right_url" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="right_tip" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="sys_right_sys_role_right" Member="sys_role_right" ThisKey="right_code" OtherKey="rf_right_code" Type="sys_role_right" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sys_role" Member="sys_role">
+    <Type Name="sys_role">
+      <Column Name="role_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="role_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="role_desc" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="role_flag" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="sys_role_sys_user" Member="sys_user" ThisKey="role_id" OtherKey="usr_role_id" Type="sys_user" />
+      <Association Name="sys_role_sys_role_right" Member="sys_role_right" ThisKey="role_id" OtherKey="rf_role_id" Type="sys_role_right" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sys_role_right" Member="sys_role_right">
+    <Type Name="sys_role_right">
+      <Column Name="rf_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="rf_role_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="rf_right_code" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="sys_right_sys_role_right" Member="sys_right" ThisKey="rf_right_code" OtherKey="right_code" Type="sys_right" IsForeignKey="true" />
+      <Association Name="sys_role_sys_role_right" Member="sys_role" ThisKey="rf_role_id" OtherKey="role_id" Type="sys_role" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
